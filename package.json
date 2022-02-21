@@ -1,0 +1,69 @@
+{
+  "name": "@caskprotocol/checkout-widget",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
+  "license": "MIT",
+  "description": "Checkout widget for integrating Cask Protocol.",
+  "directories": {
+    "docs": "docs",
+    "examples": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CaskProtocol/checkout-widget"
+  },
+  "bugs": {
+    "url": "https://github.com/CaskProtocol/checkout-widget/issues"
+  },
+  "author": "Subvese Labs <info@subverselabs.com>",
+  "homepage": "https://docs.cask.fi",
+  "scripts": {
+    "start": "rollup -w -c rollup.config.js",
+    "build": "rimraf dist && tsc && rollup -c rollup.config.js",
+    "lint": "eslint 'src/**/*.ts'"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.5",
+    "clsx": "^1.1.1",
+    "lit": "^2.0.0-rc.4",
+    "qs": "^6.10.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "style-object-to-css-string": "^1.0.1",
+    "util": "^0.12.4"
+  },
+  "devDependencies": {
+    "@open-wc/building-rollup": "^1.9.4",
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-typescript": "^8.2.5",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "@web/dev-server": "0.0.29",
+    "@web/dev-server-rollup": "^0.3.2",
+    "@web/rollup-plugin-html": "^1.10.0",
+    "concurrently": "^6.2.1",
+    "deepmerge": "^4.2.2",
+    "eslint": "^7.32.0",
+    "eslint-plugin-lit": "^1.5.1",
+    "http-server": "^13.0.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.34.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-entry-glob": "^0.3.0-rc1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-polyfill-node": "^0.7.0",
+    "rollup-plugin-typescript": "^1.0.1",
+    "rollup-plugin-typescript2": "^0.31.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.2",
+    "web-dev-server": "^3.0.22"
+  }
+}
