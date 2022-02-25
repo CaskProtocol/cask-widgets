@@ -27,6 +27,9 @@ export class CheckoutWidgetDialogElement extends LitElement {
   environment: CheckoutEnvironment = CheckoutEnvironment.sandbox;
 
   @property()
+  provider: string;
+
+  @property()
   plan: string;
 
   @property({type: Boolean})
@@ -50,6 +53,7 @@ export class CheckoutWidgetDialogElement extends LitElement {
   renderWidget() {
     return html`<checkout-widget
       mode="${this.mode}"
+      provider="${this.provider}"
       plan="${this.plan}"
       environment="${this.environment}"
       theme="${this.theme}"

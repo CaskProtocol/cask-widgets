@@ -1,7 +1,8 @@
 import {css, html, LitElement} from 'lit';
 import clsx from 'clsx';
 import {customElement, property} from 'lit/decorators.js';
-import {WidgetFlow} from './constants';
+import {CheckoutEnvironment, WidgetFlow} from './constants';
+import './CheckoutWidgetDialogElement';
 
 const defaultLabel = {
   [WidgetFlow.SubscriptionFlow]: 'Subscribe with',
@@ -76,6 +77,15 @@ export class SubsribeButtonElement extends LitElement {
   `;
 
   @property({type: String})
+  provider: string;
+
+  @property({type: String})
+  plan: string;
+
+  @property()
+  environment: CheckoutEnvironment = CheckoutEnvironment.sandbox;
+
+  @property({type: String})
   class: string;
 
   @property({type: Boolean})
@@ -89,6 +99,18 @@ export class SubsribeButtonElement extends LitElement {
 
   @property()
   mode: WidgetFlow = WidgetFlow.SubscriptionFlow;
+
+  @property({type: Element})
+  checkoutWidgetDialog: Element | null;
+
+  @property({type: String})
+  redirect: string;
+
+  @property({type: Function})
+  onClose: () => {};
+
+  @property({type: Function})
+  onSuccess: () => {};
 
   // for some reason open does not re-render on property change
   attributeChangedCallback(name: string, _old: string | null, value: string | null) {
@@ -109,19 +131,47 @@ export class SubsribeButtonElement extends LitElement {
     }
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.checkoutWidgetDialog = this.shadowRoot?.children[1] ? this.shadowRoot?.children[1] : null;
+  }
+
   render() {
-    const label = this.error ? 'Something went wrong' : defaultLabel[this.mode];
+    const label = this.error ? 'Something went wrong' : defaultLabel['subscription-flow'];
 
     return html`<button
-      part="button"
-      ?disabled=${this.loading || this.error || this.disabled}
-      class="${clsx('subscribe-with-cask-button', {
-        'subscribe-with-cask-button--loading': this.loading,
-        'subscribe-with-cask-button--disabled': this.loading || this.disabled,
-      })}"
-      type="button"
-    >
-      ${this.loading ? '' : label}
-    </button> `;
+        part="button"
+        ?disabled=${this.loading || this.error || this.disabled}
+        class="${clsx('subscribe-with-cask-button', {
+          'subscribe-with-cask-button--loading': this.loading,
+          'subscribe-with-cask-button--disabled': this.loading || this.disabled,
+        })}"
+        type="button"
+        onClick="(function(el){
+          el.setAttribute('loading', true);
+          var checkoutWidgetDialog = el.nextElementSibling
+          checkoutWidgetDialog.addEventListener('close', () => {
+            checkoutWidgetDialog.open = false;
+            ${this.onClose ? this.onClose + '();' : ''}
+          })
+          checkoutWidgetDialog.addEventListener('successSubscription', (event) => {
+            checkoutWidgetDialog.open = false;
+            ${this.onSuccess ? this.onSuccess + '(event.detail.txHash);' : ''}
+            ${this.redirect && this.redirect.indexOf('http') === 0
+          ? "window.location='" + this.redirect + "?txHash=' + event.detail.txHash"
+          : ''};
+          })
+          checkoutWidgetDialog.open = true;
+          el.setAttribute('loading', false);
+          return false;
+      })(this);return false;"
+      >
+        ${this.loading ? '' : label}
+      </button>
+      <checkout-widget-dialog
+        provider="${this.provider}"
+        plan="${this.plan}"
+        environment="${this.environment}"
+      ></checkout-widget-dialog>`;
   }
 }

@@ -30,6 +30,9 @@ export class CheckoutWidgetElement extends LitElement {
   environment: CheckoutEnvironment = CheckoutEnvironment.sandbox;
 
   @property()
+  provider: string;
+
+  @property()
   plan: string;
 
   @property()
@@ -77,7 +80,7 @@ export class CheckoutWidgetElement extends LitElement {
   iframe!: HTMLIFrameElement;
 
   render() {
-    const source = environmentUrls[this.environment] + this.plan;
+    const source = environmentUrls[this.environment] + this.provider + '/' + this.plan;
     return html`<iframe
       class="${clsx({'dark-theme': this.theme === WidgetTheme.Dark})}"
       id="checkout-iframe"
