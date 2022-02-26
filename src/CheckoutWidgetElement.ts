@@ -16,9 +16,10 @@ const environmentUrls = {
 export class CheckoutWidgetElement extends LitElement {
   static styles = css`
     iframe {
-      border: none;
       width: 450px;
-      height: 450px;
+      height: 700px;
+      border: 1px solid gray;
+      border-radius: 15px;
     }
     .dark-theme {
       border: 1px solid rgba(255, 255, 255, 0.1);
