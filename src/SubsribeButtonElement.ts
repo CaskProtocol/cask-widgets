@@ -17,7 +17,7 @@ export class SubsribeButtonElement extends LitElement {
     }
     .subscribe-with-cask-button {
       position: relative;
-      background: linear-gradient(90deg, #7622a9 0%, #7622a9 100%);
+      background: #806daf;
       min-height: 50px;
       min-width: 286px;
       border: none;
