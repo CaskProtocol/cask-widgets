@@ -155,7 +155,6 @@ export class SubsribeButtonElement extends LitElement {
             ${this.onClose ? this.onClose + '();' : ''}
           })
           checkoutWidgetDialog.addEventListener('successSubscription', (event) => {
-            checkoutWidgetDialog.open = false;
             ${this.onSuccess ? this.onSuccess + '(event.detail.txHash);' : ''}
             ${this.redirect && this.redirect.indexOf('http') === 0
           ? "window.location='" + this.redirect + "?txHash=' + event.detail.txHash"
