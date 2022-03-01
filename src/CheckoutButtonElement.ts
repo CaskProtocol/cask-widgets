@@ -1,11 +1,15 @@
 import {css, html, LitElement} from 'lit';
+import {svg} from 'lit-html';
+import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 import clsx from 'clsx';
 import {customElement, property} from 'lit/decorators.js';
 import {CheckoutEnvironment, WidgetFlow} from './constants';
 import './CheckoutWidgetDialogElement';
 
+import ButtonBackground from './checkout-with-crypto.svg';
+
 const defaultLabel = {
-  [WidgetFlow.CheckoutFlow]: 'Checkout with',
+  [WidgetFlow.CheckoutFlow]: svg`${unsafeSVG(ButtonBackground)}`,
 };
 
 @customElement('checkout-with-cask-button')
@@ -17,19 +21,17 @@ export class CheckoutButtonElement extends LitElement {
     }
     .checkout-with-cask-button {
       position: relative;
-      background: #806daf;
-      min-height: 50px;
-      min-width: 286px;
+      padding: 0px;
+      fill: #8156c3;
+      height: 92px;
+      width: 286px;
       border: none;
-      border-radius: 3px;
       cursor: pointer;
       color: #fff;
       outline: none;
       font-size: 16px;
     }
-
     .checkout-with-cask-button::after {
-      content: 'Cask';
       color: #ffffff;
       font-size: 16px;
       border-radius: 8px;

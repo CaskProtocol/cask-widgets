@@ -3,3 +3,5 @@ declare namespace global {
     'checkout-widget-dialog': any;
   }
 }
+
+declare module '*.svg';
