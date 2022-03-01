@@ -36,7 +36,7 @@ export class CheckoutWidgetDialogElement extends LitElement {
   open: boolean;
 
   @property()
-  mode: WidgetFlow = WidgetFlow.SubscriptionFlow;
+  mode: WidgetFlow = WidgetFlow.CheckoutFlow;
 
   @property()
   theme: WidgetTheme = WidgetTheme.Light;

@@ -37,15 +37,15 @@ export class CheckoutWidgetElement extends LitElement {
   plan: string;
 
   @property()
-  mode: WidgetFlow = WidgetFlow.SubscriptionFlow;
+  mode: WidgetFlow = WidgetFlow.CheckoutFlow;
 
   @property()
   theme: WidgetTheme;
 
   connectedCallback() {
     super.connectedCallback();
-    if (this.mode === WidgetFlow.SubscriptionFlow && !this.plan)
-      throw new Error("plan is required attribute in 'subscription-flow' mode");
+    if (this.mode === WidgetFlow.CheckoutFlow && !this.plan)
+      throw new Error("plan is required attribute in 'checkout-flow' mode");
 
     window.addEventListener('message', (event) => this.handleMessage(event));
   }
@@ -56,6 +56,12 @@ export class CheckoutWidgetElement extends LitElement {
   }
 
   handleMessage(event: MessageEvent<CheckoutAction>) {
+    // doesn't work!
+    if (this.iframe && this.iframe.contentWindow?.document.body.scrollWidth)
+      this.iframe.setAttribute('width', this.iframe.contentWindow?.document.body.scrollWidth.toString() + 'px');
+    if (this.iframe && this.iframe.contentWindow?.document.body.scrollHeight)
+      this.iframe.setAttribute('height', this.iframe.contentWindow?.document.body.scrollHeight.toString() + 'px');
+
     const action = event.data;
     this.dispatchEvent(new CustomEvent(action.type, {detail: event.data, bubbles: true, composed: true}));
 
@@ -72,7 +78,7 @@ export class CheckoutWidgetElement extends LitElement {
       this.requestUpdate();
     }
 
-    if (action?.type === IframeEvents.successSubscription) {
+    if (action?.type === IframeEvents.successCheckout) {
       this.requestUpdate();
     }
   }

@@ -1,4 +1,4 @@
 /// <reference types="./globals" />
 
-export * from './SubsribeButtonElement';
+export * from './CheckoutButtonElement';
 export * from './CheckoutWidgetDialogElement';

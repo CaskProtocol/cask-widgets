@@ -5,17 +5,17 @@ import {CheckoutEnvironment, WidgetFlow} from './constants';
 import './CheckoutWidgetDialogElement';
 
 const defaultLabel = {
-  [WidgetFlow.SubscriptionFlow]: 'Subscribe with',
+  [WidgetFlow.CheckoutFlow]: 'Checkout with',
 };
 
-@customElement('subscribe-with-cask-button')
-export class SubsribeButtonElement extends LitElement {
+@customElement('checkout-with-cask-button')
+export class CheckoutButtonElement extends LitElement {
   static styles = css`
     :root {
       width: 100%;
       display: block;
     }
-    .subscribe-with-cask-button {
+    .checkout-with-cask-button {
       position: relative;
       background: #806daf;
       min-height: 50px;
@@ -28,18 +28,18 @@ export class SubsribeButtonElement extends LitElement {
       font-size: 16px;
     }
 
-    .subscribe-with-cask-button::after {
+    .checkout-with-cask-button::after {
       content: 'Cask';
       color: #ffffff;
       font-size: 16px;
       border-radius: 8px;
     }
 
-    .subscribe-with-cask-button--loading {
+    .checkout-with-cask-button--loading {
       text-align: left;
     }
 
-    .subscribe-with-cask-button--loading::after {
+    .checkout-with-cask-button--loading::after {
       content: '';
       background-color: transparent;
       position: absolute;
@@ -56,12 +56,12 @@ export class SubsribeButtonElement extends LitElement {
       animation: button-loading-spinner 1s ease infinite;
     }
 
-    .subscribe-with-cask-button--loading > * {
+    .checkout-with-cask-button--loading > * {
       visibility: hidden;
       opacity: 0;
     }
 
-    .subscribe-with-cask-button--disabled {
+    .checkout-with-cask-button--disabled {
       opacity: 0.5;
     }
 
@@ -98,7 +98,7 @@ export class SubsribeButtonElement extends LitElement {
   error: boolean;
 
   @property()
-  mode: WidgetFlow = WidgetFlow.SubscriptionFlow;
+  mode: WidgetFlow = WidgetFlow.CheckoutFlow;
 
   @property({type: Element})
   checkoutWidgetDialog: Element | null;
@@ -137,14 +137,14 @@ export class SubsribeButtonElement extends LitElement {
   }
 
   render() {
-    const label = this.error ? 'Something went wrong' : defaultLabel['subscription-flow'];
+    const label = this.error ? 'Something went wrong' : defaultLabel['checkout-flow'];
 
     return html`<button
         part="button"
         ?disabled=${this.loading || this.error || this.disabled}
-        class="${clsx('subscribe-with-cask-button', {
-          'subscribe-with-cask-button--loading': this.loading,
-          'subscribe-with-cask-button--disabled': this.loading || this.disabled,
+        class="${clsx('checkout-with-cask-button', {
+          'checkout-with-cask-button--loading': this.loading,
+          'checkout-with-cask-button--disabled': this.loading || this.disabled,
         })}"
         type="button"
         onClick="(function(el){
@@ -154,7 +154,7 @@ export class SubsribeButtonElement extends LitElement {
             checkoutWidgetDialog.open = false;
             ${this.onClose ? this.onClose + '();' : ''}
           })
-          checkoutWidgetDialog.addEventListener('successSubscription', (event) => {
+          checkoutWidgetDialog.addEventListener('successCheckout', (event) => {
             ${this.onSuccess ? this.onSuccess + '(event.detail.txHash);' : ''}
             ${this.redirect && this.redirect.indexOf('http') === 0
           ? "window.location='" + this.redirect + "?txHash=' + event.detail.txHash"

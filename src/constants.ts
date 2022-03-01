@@ -1,7 +1,7 @@
 export const CASK_settings = '__CASK_settings';
 
 export enum WidgetFlow {
-  SubscriptionFlow = 'subscription-flow',
+  CheckoutFlow = 'checkout-flow',
 }
 
 export enum WidgetTheme {
@@ -13,7 +13,7 @@ export enum IframeEvents {
   styles = 'styles',
   close = 'close',
   redirect = 'redirect',
-  successSubscription = 'successSubscription',
+  successCheckout = 'successCheckout',
   settings = 'settings',
 }
 
