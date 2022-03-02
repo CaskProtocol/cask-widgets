@@ -142,16 +142,22 @@ export class CheckoutButtonElement extends LitElement {
     const label = this.error ? 'Something went wrong' : defaultLabel['checkout-flow'];
 
     return html`<button
-        part="button"
-        ?disabled=${this.loading || this.error || this.disabled}
-        class="${clsx('checkout-with-cask-button', {
-          'checkout-with-cask-button--loading': this.loading,
-          'checkout-with-cask-button--disabled': this.loading || this.disabled,
-        })}"
-        type="button"
-        onClick="(function(el){
+      part="button"
+      ?disabled=${this.loading || this.error || this.disabled}
+      class="${clsx('checkout-with-cask-button', {
+        'checkout-with-cask-button--loading': this.loading,
+        'checkout-with-cask-button--disabled': this.loading || this.disabled,
+      })}"
+      type="button"
+      onClick="(function(el){
           el.setAttribute('loading', true);
-          var checkoutWidgetDialog = el.nextElementSibling
+
+          var checkoutWidgetDialog = document.createElement('checkout-widget-dialog');
+          checkoutWidgetDialog.provider='${this.provider}';
+          checkoutWidgetDialog.plan='${this.plan}';
+          checkoutWidgetDialog.environment='${this.environment}';
+          document.body.appendChild(checkoutWidgetDialog);
+
           checkoutWidgetDialog.addEventListener('close', () => {
             checkoutWidgetDialog.open = false;
             ${this.onClose ? this.onClose + '();' : ''}
@@ -159,20 +165,15 @@ export class CheckoutButtonElement extends LitElement {
           checkoutWidgetDialog.addEventListener('successCheckout', (event) => {
             ${this.onSuccess ? this.onSuccess + '(event.detail.txHash);' : ''}
             ${this.redirect && this.redirect.indexOf('http') === 0
-          ? "window.location='" + this.redirect + "?txHash=' + event.detail.txHash"
-          : ''};
+        ? "window.location='" + this.redirect + "?txHash=' + event.detail.txHash"
+        : ''};
           })
           checkoutWidgetDialog.open = true;
           el.setAttribute('loading', false);
           return false;
       })(this);return false;"
-      >
-        ${this.loading ? '' : label}
-      </button>
-      <checkout-widget-dialog
-        provider="${this.provider}"
-        plan="${this.plan}"
-        environment="${this.environment}"
-      ></checkout-widget-dialog>`;
+    >
+      ${this.loading ? '' : label}
+    </button> `;
   }
 }
