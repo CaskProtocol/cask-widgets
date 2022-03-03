@@ -8,6 +8,7 @@ export class CheckoutWidgetDialogElement extends LitElement {
   static styles = css`
     .modal {
       display: flex;
+      height: 100%;
       background: rgba(0, 0, 0, 0.3);
       z-index: 5;
       overflow: scroll;
@@ -16,8 +17,8 @@ export class CheckoutWidgetDialogElement extends LitElement {
       left: 0;
       right: 0;
       bottom: 0;
-      align-items: center;
       justify-content: center;
+      padding-top: 25px;
     }
     .modal--closed {
       display: none;
