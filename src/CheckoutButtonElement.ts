@@ -152,22 +152,34 @@ export class CheckoutButtonElement extends LitElement {
       onClick="(function(el){
           el.setAttribute('loading', true);
 
+          document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            if (evt.keyCode == 27) {
+              checkoutWidgetDialog.open = false;
+            }
+          };
+
           var checkoutWidgetDialog = document.createElement('checkout-widget-dialog');
           checkoutWidgetDialog.provider='${this.provider}';
           checkoutWidgetDialog.plan='${this.plan}';
           checkoutWidgetDialog.environment='${this.environment}';
           document.body.appendChild(checkoutWidgetDialog);
 
+          checkoutWidgetDialog.addEventListener('click', () => {
+            checkoutWidgetDialog.open = false;
+            ${this.onClose ? this.onClose + '();' : ''}
+          });
           checkoutWidgetDialog.addEventListener('close', () => {
             checkoutWidgetDialog.open = false;
             ${this.onClose ? this.onClose + '();' : ''}
-          })
+          });
           checkoutWidgetDialog.addEventListener('successCheckout', (event) => {
             ${this.onSuccess ? this.onSuccess + '(event.detail.txHash);' : ''}
             ${this.redirect && this.redirect.indexOf('http') === 0
         ? "window.location='" + this.redirect + "?txHash=' + event.detail.txHash"
         : ''};
-          })
+          });
+
           checkoutWidgetDialog.open = true;
           el.setAttribute('loading', false);
           return false;
