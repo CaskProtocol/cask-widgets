@@ -20,8 +20,12 @@ export class CheckoutButtonElement extends LitElement {
       display: block;
     }
     .checkout-with-cask-button {
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+      background: transparent;
+      line-height: normal;
       position: relative;
-      padding: 0px;
       fill: #8156c3;
       height: 92px;
       width: 286px;
@@ -31,30 +35,9 @@ export class CheckoutButtonElement extends LitElement {
       outline: none;
       font-size: 16px;
     }
-    .checkout-with-cask-button::after {
-      color: #ffffff;
-      font-size: 16px;
-      border-radius: 8px;
-    }
-
-    .checkout-with-cask-button--loading {
-      text-align: left;
-    }
 
     .checkout-with-cask-button--loading::after {
       content: '';
-      background-color: transparent;
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      margin: auto;
-      border: 4px solid transparent;
-      border-top-color: #ffffff;
-      border-radius: 50%;
       animation: button-loading-spinner 1s ease infinite;
     }
 
