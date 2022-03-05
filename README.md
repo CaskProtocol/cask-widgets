@@ -1,6 +1,6 @@
 # Overview
 
-The repo contains the Cask Protocol checkout widget that can be integrated into your website.
+The repo contains the Cask Protocol checkout button/widget that can be integrated into your website.
 
 # Installation
 
@@ -24,20 +24,35 @@ Add this import to starting point of your project such as: index.js or index.ts 
 import '@caskprotocol/checkout-widget';
 ```
 
-Create a `<checkout-widget-dialog/>` element with required attributes mentioned below.
+Create a `<cask-checkout-button/>` element with required attributes mentioned below.
 
 ```html
-<checkout-widget-dialog mode="subscription-flow" environment="sandbox" subcribeLink="<PROVIDER_ADDRES>/<PLAN_ID>" />
+<cask-checkout-button
+  class="cask-checkout-button"
+  provider="0x...."
+  plan="123456"
+  environment="sandbox"
+  onClose="close"
+  onSuccess="success"
+  label="Checkout with Crypto"
+></cask-checkout-button>
 ```
 
 ### Attributes:
 
-| name        | Required |                                                                                                 Description |
-| ----------- | :------: | ----------------------------------------------------------------------------------------------------------: |
-| mode        |          |                                                            Currently only `subscription-flow` is supported. |
-| environment |    ✔     | Environment you want to use. If you want test widget use `sandbox`. Possible values: `sandbox`,`production` |
-| plan        |          |                                             Your provider wallet address and plan id, separated with a `/`. |
-| theme       |          |                                                                  Widget theme. Possible values: dark, light |
+| name        | Required |                                                                                Description |
+|-------------|:--------:|-------------------------------------------------------------------------------------------:|
+| class       |          |                                                                        CSS classes to add. |
+| environment |          |     Environment. Possible values: `integration` or `production`. Defaults to `production`. |
+| provider    |    ✔     |                                                              Your provider wallet address. |
+| plan        |    ✔     |                                                                         Your Cask plan id. |
+| label       |          |                                                              Message to put on the button. |
+| ref         |          |                         Include a custom value associated with the Cask subscription data. |
+| size        |          |         Button size. Possible values:`regular`, `large` or `small`. Defaults to `regular`. |
+| theme       |          |                      Widget theme. Possible values: `dark` or `light`. Defaults to `dark`. |
+| redirect    |          | Redirect to URL upon successful subscribe. Does not call `onSuccess` handler, if supplied. |
+| onClose     |          |                                                                Callback for `close` event. |
+| onSuccess   |          |                                                  Callback for `successSubscription` event. |
 
 ### Events:
 
@@ -46,47 +61,23 @@ Create a `<checkout-widget-dialog/>` element with required attributes mentioned 
 | close               |          Fires after widget closes |
 | successSubscription | Fires when user subscribes to plan |
 
-Create a `<subscribe-with-cask-button/>` element with required attributes mentioned below.
-
-```html
-<subscribe-with-cask-button disabled="false" loading="false" error="false" mode="subscription-flow" />
-```
-
-### Attributes:
-
-| name     | Required |                                     Description |
-| -------- | :------: | ----------------------------------------------: |
-| disabled |          |                       Disables button when true |
-| loading  |          |                         Shows loading indicator |
-| error    |          |                           Shows error indicator |
-| mode     |          | Currently only `subscription-flow` is supported |
 
 ### Styling:
 
-`subscribe-with-cask-button` uses [Shadow CSS ::part](https://github.com/fergald/docs/blob/master/explainers/css-shadow-parts-1.md) spec. It has button inside defined as `button` part
+`cask-checkout-button` uses [Shadow CSS ::part](https://github.com/fergald/docs/blob/master/explainers/css-shadow-parts-1.md) spec. It has button inside defined as `button` part
 ![img.png](docs/button_part.png)
 
 ```html
 <style>
-  .subscribe-with-cask::part(button) {
+  .cask-checkout-button::part(button) {
+    background-color: aqua;
     width: 100%; /* Those styles apply to button in shadow root */
   }
 </style>
-<subscribe-with-cask-button
-  class="subscribe-with-cask"
-  disabled="false"
-  loading="false"
-  error="false"
-  mode="subscription-flow"
+<cask-checkout-button
+  class="cask-checkout-button"
+  label="Pay with Crypto"
 />
 ```
 
 See more about `::part()` on https://developer.mozilla.org/en-US/docs/Web/CSS/::part
-
-### Events:
-
-| name  |           Description |
-| ----- | --------------------: |
-| click | Fires on button click |
-
-`<subscribe-with-cask-button>` extends all button events

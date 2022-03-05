@@ -1,10 +1,10 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {CheckoutEnvironment, WidgetFlow, WidgetTheme} from './constants';
-import './CheckoutWidgetElement';
+import './CaskCheckoutElement';
 
-@customElement('checkout-widget-dialog')
-export class CheckoutWidgetDialogElement extends LitElement {
+@customElement('cask-checkout-dialog')
+export class CaskCheckoutDialogElement extends LitElement {
   static styles = css`
     .modal {
       display: flex;
@@ -33,6 +33,9 @@ export class CheckoutWidgetDialogElement extends LitElement {
   @property()
   plan: string;
 
+  @property()
+  ref: string;
+
   @property({type: Boolean})
   open: boolean;
 
@@ -52,13 +55,14 @@ export class CheckoutWidgetDialogElement extends LitElement {
   }
 
   renderWidget() {
-    return html`<checkout-widget
+    return html`<cask-checkout
       mode="${this.mode}"
       provider="${this.provider}"
       plan="${this.plan}"
+      ref="${this.ref}"
       environment="${this.environment}"
       theme="${this.theme}"
-    ></checkout-widget>`;
+    ></cask-checkout>`;
   }
 
   render() {
