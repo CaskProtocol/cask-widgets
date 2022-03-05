@@ -1,6 +1,6 @@
 declare namespace global {
   interface HTMLElementTagNameMap {
-    'checkout-widget-dialog': any;
+    'cask-checkout-dialog': any;
   }
 }
 

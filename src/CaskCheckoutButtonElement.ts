@@ -2,17 +2,17 @@ import {css, html, LitElement} from 'lit';
 import clsx from 'clsx';
 import {customElement, property} from 'lit/decorators.js';
 import {ButtonSize, CheckoutEnvironment, WidgetFlow} from './constants';
-import './CheckoutWidgetDialogElement';
+import './CaskCheckoutDialogElement';
 
 
-@customElement('checkout-with-cask-button')
-export class CheckoutButtonElement extends LitElement {
+@customElement('cask-checkout-button')
+export class CaskCheckoutButtonElement extends LitElement {
   static styles = css`
     :root {
       width: 100%;
       display: block;
     }
-    .checkout-with-cask-button {
+    .cask-checkout-button {
       margin: 0;
       overflow: visible;
       position: relative;
@@ -28,7 +28,7 @@ export class CheckoutButtonElement extends LitElement {
       font-size: 14px;
       line-height: 30px;
     }
-    .checkout-with-cask-button:hover {
+    .cask-checkout-button:hover {
       box-shadow: inset 0 0 20px 20px rgb(0 0 0 / 10%);
     }
 
@@ -44,17 +44,17 @@ export class CheckoutButtonElement extends LitElement {
       font-size: 24px;
     }
 
-    .checkout-with-cask-button--loading::after {
+    .cask-checkout-button--loading::after {
       content: '';
       animation: button-loading-spinner 1s ease infinite;
     }
 
-    .checkout-with-cask-button--loading > * {
+    .cask-checkout-button--loading > * {
       visibility: hidden;
       opacity: 0;
     }
 
-    .checkout-with-cask-button--disabled {
+    .cask-checkout-button--disabled {
       opacity: 0.5;
     }
 
@@ -70,7 +70,7 @@ export class CheckoutButtonElement extends LitElement {
   `;
 
   @property({type: String})
-  label: string;
+  label: string = "Checkout with Crypto";
 
   @property({type: String})
   provider: string;
@@ -103,7 +103,7 @@ export class CheckoutButtonElement extends LitElement {
   mode: WidgetFlow = WidgetFlow.CheckoutFlow;
 
   @property({type: Element})
-  checkoutWidgetDialog: Element | null;
+  caskCheckoutDialog: Element | null;
 
   @property({type: String})
   redirect: string;
@@ -135,16 +135,16 @@ export class CheckoutButtonElement extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.checkoutWidgetDialog = this.shadowRoot?.children[1] ? this.shadowRoot?.children[1] : null;
+    this.caskCheckoutDialog = this.shadowRoot?.children[1] ? this.shadowRoot?.children[1] : null;
   }
 
   render() {
     return html`<button
       part="button"
       ?disabled=${this.loading || this.error || this.disabled}
-      class="${clsx('checkout-with-cask-button', {
-        'checkout-with-cask-button--loading': this.loading,
-        'checkout-with-cask-button--disabled': this.loading || this.disabled,
+      class="${clsx('cask-checkout-button', {
+        'cask-checkout-button--loading': this.loading,
+        'cask-checkout-button--disabled': this.loading || this.disabled,
       },this.size)}"
       type="button"
       onClick="(function(el){
@@ -153,33 +153,33 @@ export class CheckoutButtonElement extends LitElement {
           document.onkeydown = function(evt) {
             evt = evt || window.event;
             if (evt.keyCode == 27) {
-              checkoutWidgetDialog.open = false;
+              caskCheckoutDialog.open = false;
             }
           };
 
-          var checkoutWidgetDialog = document.createElement('checkout-widget-dialog');
-          checkoutWidgetDialog.provider='${this.provider}';
-          checkoutWidgetDialog.plan='${this.plan}';
-          checkoutWidgetDialog.ref='${this.ref}';
-          checkoutWidgetDialog.environment='${this.environment}';
-          document.body.appendChild(checkoutWidgetDialog);
+          var caskCheckoutDialog = document.createElement('cask-checkout-dialog');
+          caskCheckoutDialog.provider='${this.provider}';
+          caskCheckoutDialog.plan='${this.plan}';
+          caskCheckoutDialog.ref='${this.ref}';
+          caskCheckoutDialog.environment='${this.environment}';
+          document.body.appendChild(caskCheckoutDialog);
 
-          checkoutWidgetDialog.addEventListener('click', () => {
-            checkoutWidgetDialog.open = false;
+          caskCheckoutDialog.addEventListener('click', () => {
+            caskCheckoutDialog.open = false;
             ${this.onClose ? this.onClose + '();' : ''}
           });
-          checkoutWidgetDialog.addEventListener('close', () => {
-            checkoutWidgetDialog.open = false;
+          caskCheckoutDialog.addEventListener('close', () => {
+            caskCheckoutDialog.open = false;
             ${this.onClose ? this.onClose + '();' : ''}
           });
-          checkoutWidgetDialog.addEventListener('successCheckout', (event) => {
+          caskCheckoutDialog.addEventListener('successCheckout', (event) => {
             ${this.onSuccess ? this.onSuccess + '(event.detail.txHash);' : ''}
             ${this.redirect && this.redirect.indexOf('http') === 0
         ? "window.location='" + this.redirect + "?txHash=' + event.detail.txHash"
         : ''};
           });
 
-          checkoutWidgetDialog.open = true;
+          caskCheckoutDialog.open = true;
           el.setAttribute('loading', false);
           return false;
       })(this);return false;"

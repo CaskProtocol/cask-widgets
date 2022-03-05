@@ -6,7 +6,7 @@
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "license": "MIT",
-  "description": "Checkout widget for integrating Cask Protocol.",
+  "description": "Checkout Button for integrating Cask Protocol.",
   "directories": {
     "docs": "docs",
     "examples": "examples"

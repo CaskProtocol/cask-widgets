@@ -12,8 +12,8 @@ const environmentUrls = {
   production: '//app.cask.fi/#/subscribe/',
 };
 
-@customElement('checkout-widget')
-export class CheckoutWidgetElement extends LitElement {
+@customElement('cask-checkout')
+export class CaskCheckoutElement extends LitElement {
   static styles = css`
     iframe {
       width: 450px;
@@ -48,7 +48,7 @@ export class CheckoutWidgetElement extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     if (this.mode === WidgetFlow.CheckoutFlow && !this.plan)
-      throw new Error("plan is required attribute in 'checkout-flow' mode");
+      throw new Error("plan is required attribute in 'cask-checkout-flow' mode");
 
     window.addEventListener('message', (event) => this.handleMessage(event));
   }
@@ -86,7 +86,7 @@ export class CheckoutWidgetElement extends LitElement {
     }
   }
 
-  @query('#checkout-iframe')
+  @query('#cask-checkout-iframe')
   iframe!: HTMLIFrameElement;
 
   render() {
@@ -95,7 +95,7 @@ export class CheckoutWidgetElement extends LitElement {
     // const source = environmentUrls[this.environment] + this.provider + '/' + this.plan + (this.ref ? '?ref='+this.ref : '');
     return html`<iframe
       class="${clsx({'dark-theme': this.theme === WidgetTheme.Dark})}"
-      id="checkout-iframe"
+      id="cask-checkout-iframe"
       title="Cask Checkout Widget"
       src="${source}"
     ></iframe> `;
