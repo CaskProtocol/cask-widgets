@@ -60,10 +60,10 @@ export class CaskCheckoutElement extends LitElement {
 
   handleMessage(event: MessageEvent<CheckoutAction>) {
     // doesn't work!
-    if (this.iframe && this.iframe.contentWindow?.document.body.scrollWidth)
-      this.iframe.setAttribute('width', this.iframe.contentWindow?.document.body.scrollWidth.toString() + 'px');
-    if (this.iframe && this.iframe.contentWindow?.document.body.scrollHeight)
-      this.iframe.setAttribute('height', this.iframe.contentWindow?.document.body.scrollHeight.toString() + 'px');
+    // if (this.iframe && this.iframe.contentWindow?.document.body.scrollWidth)
+    //   this.iframe.setAttribute('width', this.iframe.contentWindow?.document.body.scrollWidth.toString() + 'px');
+    // if (this.iframe && this.iframe.contentWindow?.document.body.scrollHeight)
+    //   this.iframe.setAttribute('height', this.iframe.contentWindow?.document.body.scrollHeight.toString() + 'px');
 
     const action = event.data;
     this.dispatchEvent(new CustomEvent(action.type, {detail: event.data, bubbles: true, composed: true}));
