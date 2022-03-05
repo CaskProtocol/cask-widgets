@@ -28,6 +28,9 @@ export class CheckoutButtonElement extends LitElement {
       font-size: 14px;
       line-height: 30px;
     }
+    .checkout-with-cask-button:hover {
+      box-shadow: inset 0 0 20px 20px rgb(0 0 0 / 10%);
+    }
 
     .small {
       height: 23px;
