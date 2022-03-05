@@ -1,16 +1,9 @@
 import {css, html, LitElement} from 'lit';
-import {svg} from 'lit-html';
-import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 import clsx from 'clsx';
 import {customElement, property} from 'lit/decorators.js';
-import {CheckoutEnvironment, WidgetFlow} from './constants';
+import {ButtonSize, CheckoutEnvironment, WidgetFlow} from './constants';
 import './CheckoutWidgetDialogElement';
 
-import ButtonBackground from './checkout-with-crypto.svg';
-
-const defaultLabel = {
-  [WidgetFlow.CheckoutFlow]: svg`${unsafeSVG(ButtonBackground)}`,
-};
 
 @customElement('checkout-with-cask-button')
 export class CheckoutButtonElement extends LitElement {
@@ -21,19 +14,31 @@ export class CheckoutButtonElement extends LitElement {
     }
     .checkout-with-cask-button {
       margin: 0;
-      padding: 0;
       overflow: visible;
-      background: transparent;
-      line-height: normal;
       position: relative;
-      fill: #8156c3;
-      height: 92px;
-      width: 286px;
+      background-color: #8156c3;
       border: none;
       cursor: pointer;
       color: #fff;
       outline: none;
-      font-size: 16px;
+      font-family: inherit;
+      border-radius: 5px;
+      padding: 0 16px;
+      height: 33px;
+      font-size: 14px;
+      line-height: 30px;
+    }
+
+    .small {
+      height: 23px;
+      line-height: 20px;
+      font-size: 10px;
+    }
+    
+    .large {
+      height: 43px;
+      line-height: 40px;
+      font-size: 24px;
     }
 
     .checkout-with-cask-button--loading::after {
@@ -62,13 +67,22 @@ export class CheckoutButtonElement extends LitElement {
   `;
 
   @property({type: String})
+  label: string;
+
+  @property({type: String})
   provider: string;
 
   @property({type: String})
   plan: string;
 
+  @property({type: String})
+  ref: string;
+
   @property()
   environment: CheckoutEnvironment = CheckoutEnvironment.sandbox;
+
+  @property({type: String})
+  size: ButtonSize = ButtonSize.Regular;
 
   @property({type: String})
   class: string;
@@ -122,15 +136,13 @@ export class CheckoutButtonElement extends LitElement {
   }
 
   render() {
-    const label = this.error ? 'Something went wrong' : defaultLabel['checkout-flow'];
-
     return html`<button
       part="button"
       ?disabled=${this.loading || this.error || this.disabled}
       class="${clsx('checkout-with-cask-button', {
         'checkout-with-cask-button--loading': this.loading,
         'checkout-with-cask-button--disabled': this.loading || this.disabled,
-      })}"
+      },this.size)}"
       type="button"
       onClick="(function(el){
           el.setAttribute('loading', true);
@@ -145,6 +157,7 @@ export class CheckoutButtonElement extends LitElement {
           var checkoutWidgetDialog = document.createElement('checkout-widget-dialog');
           checkoutWidgetDialog.provider='${this.provider}';
           checkoutWidgetDialog.plan='${this.plan}';
+          checkoutWidgetDialog.ref='${this.ref}';
           checkoutWidgetDialog.environment='${this.environment}';
           document.body.appendChild(checkoutWidgetDialog);
 
@@ -168,7 +181,7 @@ export class CheckoutButtonElement extends LitElement {
           return false;
       })(this);return false;"
     >
-      ${this.loading ? '' : label}
+      ${this.loading ? '' : this.label}
     </button> `;
   }
 }

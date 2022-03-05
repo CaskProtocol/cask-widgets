@@ -9,6 +9,12 @@ export enum WidgetTheme {
   Light = 'light',
 }
 
+export enum ButtonSize {
+  Small = 'small',
+  Regular = '',
+  Large = 'large',
+}
+
 export enum IframeEvents {
   styles = 'styles',
   close = 'close',

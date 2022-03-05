@@ -33,6 +33,9 @@ export class CheckoutWidgetDialogElement extends LitElement {
   @property()
   plan: string;
 
+  @property()
+  ref: string;
+
   @property({type: Boolean})
   open: boolean;
 
@@ -56,6 +59,7 @@ export class CheckoutWidgetDialogElement extends LitElement {
       mode="${this.mode}"
       provider="${this.provider}"
       plan="${this.plan}"
+      ref="${this.ref}"
       environment="${this.environment}"
       theme="${this.theme}"
     ></checkout-widget>`;

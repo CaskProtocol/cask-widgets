@@ -37,6 +37,9 @@ export class CheckoutWidgetElement extends LitElement {
   plan: string;
 
   @property()
+  ref: string;
+
+  @property()
   mode: WidgetFlow = WidgetFlow.CheckoutFlow;
 
   @property()
@@ -88,6 +91,8 @@ export class CheckoutWidgetElement extends LitElement {
 
   render() {
     const source = environmentUrls[this.environment] + this.provider + '/' + this.plan;
+    // TODO: talk to smokeynotes about how to pass ref
+    // const source = environmentUrls[this.environment] + this.provider + '/' + this.plan + (this.ref ? '?ref='+this.ref : '');
     return html`<iframe
       class="${clsx({'dark-theme': this.theme === WidgetTheme.Dark})}"
       id="checkout-iframe"

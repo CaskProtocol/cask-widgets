@@ -3,7 +3,6 @@ import {nodeResolve} from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import external from 'rollup-plugin-peer-deps-external';
 import copy from 'rollup-plugin-copy';
-import svg from 'rollup-plugin-svg';
 import {terser} from 'rollup-plugin-terser';
 import pkg from './package.json';
 
@@ -26,7 +25,6 @@ export default {
     },
   ],
   plugins: [
-    svg(),
     terser(),
     nodeResolve({browser: true}),
     copy({targets: [{src: 'src/globals.d.ts', dest: 'dist'}]}),
