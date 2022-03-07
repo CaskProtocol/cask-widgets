@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cask Topup Button Example</title>
+</head>
+<body>
+<!-- <script src="https://js.cask.fi/v1/index.js"></script> -->
+<script type="module" src="../dist/index.es.js"></script>
+
+<!-- Optional callbacks -->
+<script>
+  function close() {
+    alert('close');
+  }
+  function success(txHash) {
+    alert('success: ' + txHash);
+  }
+</script>
+
+<!-- Render button -->
+<cask-topup-button
+  environment="development"
+  onClose="close"
+  onSuccess="success"
+  label="Topup Cask Balance"
+></cask-topup-button>
+</body>
+</html>
