@@ -20,10 +20,11 @@ export enum IframeEvents {
   close = 'close',
   redirect = 'redirect',
   successCheckout = 'successCheckout',
+  successTopup = 'successTopup',
   settings = 'settings',
 }
 
-export enum CheckoutEnvironment {
+export enum CaskEnvironment {
   development = 'development',
   integration = 'integration',
   sandbox = 'sandbox',
@@ -31,6 +32,11 @@ export enum CheckoutEnvironment {
 }
 
 export interface CheckoutAction<P = unknown> {
+  type: IframeEvents;
+  payload: P;
+}
+
+export interface TopupAction<P = unknown> {
   type: IframeEvents;
   payload: P;
 }

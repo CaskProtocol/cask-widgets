@@ -1,10 +1,10 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
-import {CaskEnvironment, WidgetFlow, WidgetTheme} from './constants';
-import './CaskCheckoutElement';
+import {CaskEnvironment, WidgetTheme} from './constants';
+import './CaskTopupElement';
 
-@customElement('cask-checkout-dialog')
-export class CaskCheckoutDialogElement extends LitElement {
+@customElement('cask-topup-dialog')
+export class CaskTopupDialogElement extends LitElement {
   static styles = css`
     .modal {
       display: flex;
@@ -27,20 +27,8 @@ export class CaskCheckoutDialogElement extends LitElement {
   @property()
   environment: CaskEnvironment = CaskEnvironment.sandbox;
 
-  @property()
-  provider: string;
-
-  @property()
-  plan: string;
-
-  @property()
-  ref: string;
-
   @property({type: Boolean})
   open: boolean;
-
-  @property()
-  mode: WidgetFlow = WidgetFlow.CheckoutFlow;
 
   @property()
   theme: WidgetTheme = WidgetTheme.Light;
@@ -55,14 +43,10 @@ export class CaskCheckoutDialogElement extends LitElement {
   }
 
   renderWidget() {
-    return html`<cask-checkout
-      mode="${this.mode}"
-      provider="${this.provider}"
-      plan="${this.plan}"
-      ref="${this.ref}"
+    return html`<cask-topup
       environment="${this.environment}"
       theme="${this.theme}"
-    ></cask-checkout>`;
+    ></cask-topup>`;
   }
 
   render() {
