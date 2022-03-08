@@ -2,18 +2,18 @@ import {css, html, LitElement} from 'lit';
 import clsx from 'clsx';
 import {customElement, property, query} from 'lit/decorators.js';
 
-import {CheckoutAction, CaskEnvironment, IframeEvents, WidgetFlow, CASK_settings, WidgetTheme} from './constants';
+import {TopupAction, CaskEnvironment, IframeEvents, CASK_settings, WidgetTheme} from './constants';
 import {appendStyle} from './utils';
 
 const environmentUrls = {
-  development: '//localhost:3000/#/subscribe/',
-  integration: '//app.beta.cask.fi/#/subscribe/',
-  sandbox: '//app.sandbox.cask.fi/#/subscribe/',
-  production: '//app.cask.fi/#/subscribe/',
+  development: '//localhost:3000/#/topup/',
+  integration: '//app.beta.cask.fi/#/topup/',
+  sandbox: '//app.sandbox.cask.fi/#/topup/',
+  production: '//app.cask.fi/#/topup/',
 };
 
-@customElement('cask-checkout')
-export class CaskCheckoutElement extends LitElement {
+@customElement('cask-topup')
+export class CaskTopupElement extends LitElement {
   static styles = css`
     iframe {
       width: 450px;
@@ -31,24 +31,10 @@ export class CaskCheckoutElement extends LitElement {
   environment: CaskEnvironment = CaskEnvironment.sandbox;
 
   @property()
-  provider: string;
-
-  @property()
-  plan: string;
-
-  @property()
-  ref: string;
-
-  @property()
-  mode: WidgetFlow = WidgetFlow.CheckoutFlow;
-
-  @property()
   theme: WidgetTheme;
 
   connectedCallback() {
     super.connectedCallback();
-    if (this.mode === WidgetFlow.CheckoutFlow && !this.plan)
-      throw new Error("plan is required attribute in 'cask-checkout-flow' mode");
 
     window.addEventListener('message', (event) => this.handleMessage(event));
   }
@@ -58,7 +44,7 @@ export class CaskCheckoutElement extends LitElement {
     window.removeEventListener('message', this.handleMessage);
   }
 
-  handleMessage(event: MessageEvent<CheckoutAction>) {
+  handleMessage(event: MessageEvent<TopupAction>) {
     // doesn't work!
     // if (this.iframe && this.iframe.contentWindow?.document.body.scrollWidth)
     //   this.iframe.setAttribute('width', this.iframe.contentWindow?.document.body.scrollWidth.toString() + 'px');
@@ -81,22 +67,20 @@ export class CaskCheckoutElement extends LitElement {
       this.requestUpdate();
     }
 
-    if (action?.type === IframeEvents.successCheckout) {
+    if (action?.type === IframeEvents.successTopup) {
       this.requestUpdate();
     }
   }
 
-  @query('#cask-checkout-iframe')
+  @query('#cask-topup-iframe')
   iframe!: HTMLIFrameElement;
 
   render() {
-    const source = environmentUrls[this.environment] + this.provider + '/' + this.plan;
-    // TODO: talk to smokeynotes about how to pass ref
-    // const source = environmentUrls[this.environment] + this.provider + '/' + this.plan + (this.ref ? '?ref='+this.ref : '');
+    const source = environmentUrls[this.environment];
     return html`<iframe
       class="${clsx({'dark-theme': this.theme === WidgetTheme.Dark})}"
-      id="cask-checkout-iframe"
-      title="Cask Checkout Widget"
+      id="cask-topup-iframe"
+      title="Cask Topup Widget"
       src="${source}"
     ></iframe> `;
   }

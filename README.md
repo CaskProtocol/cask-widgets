@@ -1,19 +1,21 @@
 # Overview
 
-The repo contains the Cask Protocol checkout button/widget that can be integrated into your website.
+The repo contains the Cask Protocol buttons/widgets that can be integrated into your website. This includes a
+checkout button that can be used to provide simple signup experience as well as a top-up button that can be added
+to your app/website to allow users to ensure they maintain a healthy cask balance.
 
 # Installation
 
 To install the stable version:
 
 ```
-npm install --save @caskprotocol/checkout-widget
+npm install --save @caskprotocol/cask-widgets
 ```
 
 or using yarn:
 
 ```
-yarn add @caskprotocol/checkout-widget
+yarn add @caskprotocol/cask-widgets
 ```
 
 # Usage
@@ -21,7 +23,7 @@ yarn add @caskprotocol/checkout-widget
 Add this import to starting point of your project such as: index.js or index.ts files
 
 ```ts
-import '@caskprotocol/checkout-widget';
+import '@caskprotocol/cask-widgets';
 ```
 
 Create a `<cask-checkout-button/>` element with required attributes mentioned below.

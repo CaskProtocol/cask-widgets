@@ -1,18 +1,18 @@
 import {css, html, LitElement} from 'lit';
 import clsx from 'clsx';
 import {customElement, property} from 'lit/decorators.js';
-import {ButtonSize, CaskEnvironment, WidgetFlow} from './constants';
-import './CaskCheckoutDialogElement';
+import {ButtonSize, CaskEnvironment} from './constants';
+import './CaskTopupDialogElement';
 
 
-@customElement('cask-checkout-button')
-export class CaskCheckoutButtonElement extends LitElement {
+@customElement('cask-topup-button')
+export class CaskTopupButtonElement extends LitElement {
   static styles = css`
     :root {
       width: 100%;
       display: block;
     }
-    .cask-checkout-button {
+    .cask-topup-button {
       margin: 0;
       overflow: visible;
       position: relative;
@@ -28,7 +28,7 @@ export class CaskCheckoutButtonElement extends LitElement {
       font-size: 14px;
       line-height: 30px;
     }
-    .cask-checkout-button:hover {
+    .cask-topup-button:hover {
       box-shadow: inset 0 0 20px 20px rgb(0 0 0 / 10%);
     }
 
@@ -44,17 +44,17 @@ export class CaskCheckoutButtonElement extends LitElement {
       font-size: 24px;
     }
 
-    .cask-checkout-button--loading::after {
+    .cask-topup-button--loading::after {
       content: '';
       animation: button-loading-spinner 1s ease infinite;
     }
 
-    .cask-checkout-button--loading > * {
+    .cask-topup-button--loading > * {
       visibility: hidden;
       opacity: 0;
     }
 
-    .cask-checkout-button--disabled {
+    .cask-topup-button--disabled {
       opacity: 0.5;
     }
 
@@ -70,16 +70,7 @@ export class CaskCheckoutButtonElement extends LitElement {
   `;
 
   @property({type: String})
-  label: string = "Checkout with Crypto";
-
-  @property({type: String})
-  provider: string;
-
-  @property({type: String})
-  plan: string;
-
-  @property({type: String})
-  ref: string;
+  label: string = "Topup your Cask Balance";
 
   @property()
   environment: CaskEnvironment = CaskEnvironment.sandbox;
@@ -99,11 +90,8 @@ export class CaskCheckoutButtonElement extends LitElement {
   @property({type: Boolean})
   error: boolean;
 
-  @property()
-  mode: WidgetFlow = WidgetFlow.CheckoutFlow;
-
   @property({type: Element})
-  caskCheckoutDialog: Element | null;
+  caskTopupDialog: Element | null;
 
   @property({type: String})
   redirect: string;
@@ -135,16 +123,16 @@ export class CaskCheckoutButtonElement extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.caskCheckoutDialog = this.shadowRoot?.children[1] ? this.shadowRoot?.children[1] : null;
+    this.caskTopupDialog = this.shadowRoot?.children[1] ? this.shadowRoot?.children[1] : null;
   }
 
   render() {
     return html`<button
       part="button"
       ?disabled=${this.loading || this.error || this.disabled}
-      class="${clsx('cask-checkout-button', {
-        'cask-checkout-button--loading': this.loading,
-        'cask-checkout-button--disabled': this.loading || this.disabled,
+      class="${clsx('cask-topup-button', {
+        'cask-topup-button--loading': this.loading,
+        'cask-topup-button--disabled': this.loading || this.disabled,
       },this.size)}"
       type="button"
       onClick="(function(el){
@@ -153,33 +141,30 @@ export class CaskCheckoutButtonElement extends LitElement {
           document.onkeydown = function(evt) {
             evt = evt || window.event;
             if (evt.keyCode == 27) {
-              caskCheckoutDialog.open = false;
+              caskTopupDialog.open = false;
             }
           };
 
-          var caskCheckoutDialog = document.createElement('cask-checkout-dialog');
-          caskCheckoutDialog.provider='${this.provider}';
-          caskCheckoutDialog.plan='${this.plan}';
-          caskCheckoutDialog.ref='${this.ref}';
-          caskCheckoutDialog.environment='${this.environment}';
-          document.body.appendChild(caskCheckoutDialog);
+          var caskTopupDialog = document.createElement('cask-topup-dialog');
+          caskTopupDialog.environment='${this.environment}';
+          document.body.appendChild(caskTopupDialog);
 
-          caskCheckoutDialog.addEventListener('click', () => {
-            caskCheckoutDialog.open = false;
+          caskTopupDialog.addEventListener('click', () => {
+            caskTopupDialog.open = false;
             ${this.onClose ? this.onClose + '();' : ''}
           });
-          caskCheckoutDialog.addEventListener('close', () => {
-            caskCheckoutDialog.open = false;
+          caskTopupDialog.addEventListener('close', () => {
+            caskTopupDialog.open = false;
             ${this.onClose ? this.onClose + '();' : ''}
           });
-          caskCheckoutDialog.addEventListener('successCheckout', (event) => {
+          caskTopupDialog.addEventListener('successTopup', (event) => {
             ${this.onSuccess ? this.onSuccess + '(event.detail.txHash);' : ''}
             ${this.redirect && this.redirect.indexOf('http') === 0
         ? "window.location='" + this.redirect + "?txHash=' + event.detail.txHash"
         : ''};
           });
 
-          caskCheckoutDialog.open = true;
+          caskTopupDialog.open = true;
           el.setAttribute('loading', false);
           return false;
       })(this);return false;"
