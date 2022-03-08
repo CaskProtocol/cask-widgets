@@ -9,13 +9,13 @@ to your app/website to allow users to ensure they maintain a healthy cask balanc
 To install the stable version:
 
 ```
-npm install --save @caskprotocol/cask-widget
+npm install --save @caskprotocol/cask-widgets
 ```
 
 or using yarn:
 
 ```
-yarn add @caskprotocol/cask-widget
+yarn add @caskprotocol/cask-widgets
 ```
 
 # Usage
@@ -23,7 +23,7 @@ yarn add @caskprotocol/cask-widget
 Add this import to starting point of your project such as: index.js or index.ts files
 
 ```ts
-import '@caskprotocol/cask-widget';
+import '@caskprotocol/cask-widgets';
 ```
 
 Create a `<cask-checkout-button/>` element with required attributes mentioned below.
