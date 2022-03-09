@@ -46,10 +46,12 @@ export class CaskCheckoutElement extends LitElement {
   theme: WidgetTheme;
 
   connectedCallback() {
+    console.log(1);
     super.connectedCallback();
+    console.log(2);
     if (this.mode === WidgetFlow.CheckoutFlow && !this.plan)
       throw new Error("plan is required attribute in 'cask-checkout-flow' mode");
-
+    console.log(3);
     window.addEventListener('message', (event) => this.handleMessage(event));
   }
 
@@ -64,7 +66,7 @@ export class CaskCheckoutElement extends LitElement {
     //   this.iframe.setAttribute('width', this.iframe.contentWindow?.document.body.scrollWidth.toString() + 'px');
     // if (this.iframe && this.iframe.contentWindow?.document.body.scrollHeight)
     //   this.iframe.setAttribute('height', this.iframe.contentWindow?.document.body.scrollHeight.toString() + 'px');
-
+    console.dir(event.data);
     const action = event.data;
     this.dispatchEvent(new CustomEvent(action.type, {detail: event.data, bubbles: true, composed: true}));
 
