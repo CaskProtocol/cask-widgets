@@ -170,14 +170,17 @@ export class CaskCheckoutButtonElement extends LitElement {
           document.body.appendChild(caskCheckoutDialog);
 
           caskCheckoutDialog.addEventListener('click', () => {
+            console.log('click event received');
             caskCheckoutDialog.open = false;
             ${this.onClose ? 'window.' + this.onClose + '();' : ''}
           });
           caskCheckoutDialog.addEventListener('close', () => {
+            console.log('close event received');
             caskCheckoutDialog.open = false;
             ${this.onClose ? 'window.' + this.onClose + '();' : ''}
           });
           caskCheckoutDialog.addEventListener('successCheckout', (event) => {
+            console.log('successCheckout event received');
             ${this.onSuccess ? 'window.' + this.onSuccess + '(event.detail.txHash);' : ''}
             ${this.redirect && this.redirect.indexOf('http') === 0
         ? "window.location='" + this.redirect + "?txHash=' + event.detail.txHash"
