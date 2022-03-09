@@ -66,7 +66,7 @@ export class CaskCheckoutElement extends LitElement {
     //   this.iframe.setAttribute('width', this.iframe.contentWindow?.document.body.scrollWidth.toString() + 'px');
     // if (this.iframe && this.iframe.contentWindow?.document.body.scrollHeight)
     //   this.iframe.setAttribute('height', this.iframe.contentWindow?.document.body.scrollHeight.toString() + 'px');
-    console.dir(event.data);
+
     const action = event.data;
     this.dispatchEvent(new CustomEvent(action.type, {detail: event.data, bubbles: true, composed: true}));
 
@@ -93,8 +93,6 @@ export class CaskCheckoutElement extends LitElement {
 
   render() {
     const source = environmentUrls[this.environment] + this.provider + '/' + this.plan;
-    // TODO: talk to smokeynotes about how to pass ref
-    // const source = environmentUrls[this.environment] + this.provider + '/' + this.plan + (this.ref ? '?ref='+this.ref : '');
     return html`<iframe
       class="${clsx({'dark-theme': this.theme === WidgetTheme.Dark})}"
       id="cask-checkout-iframe"
