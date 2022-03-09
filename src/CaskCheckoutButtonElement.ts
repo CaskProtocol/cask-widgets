@@ -187,6 +187,7 @@ export class CaskCheckoutButtonElement extends LitElement {
         : ''};
           });
 
+
           caskCheckoutDialog.open = true;
           el.setAttribute('loading', false);
           return false;
