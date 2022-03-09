@@ -46,12 +46,10 @@ export class CaskCheckoutElement extends LitElement {
   theme: WidgetTheme;
 
   connectedCallback() {
-    console.log(1);
     super.connectedCallback();
-    console.log(2);
     if (this.mode === WidgetFlow.CheckoutFlow && !this.plan)
       throw new Error("plan is required attribute in 'cask-checkout-flow' mode");
-    console.log(3);
+
     window.addEventListener('message', (event) => this.handleMessage(event));
   }
 
