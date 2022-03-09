@@ -4,7 +4,6 @@ import {customElement, property} from 'lit/decorators.js';
 import {ButtonSize, CaskEnvironment} from './constants';
 import './CaskTopupDialogElement';
 
-
 @customElement('cask-topup-button')
 export class CaskTopupButtonElement extends LitElement {
   static styles = css`
@@ -37,7 +36,7 @@ export class CaskTopupButtonElement extends LitElement {
       line-height: 20px;
       font-size: 10px;
     }
-    
+
     .large {
       height: 43px;
       line-height: 40px;
@@ -70,7 +69,7 @@ export class CaskTopupButtonElement extends LitElement {
   `;
 
   @property({type: String})
-  label: string = "Topup your Cask Balance";
+  label: string = 'Topup your Cask Balance';
 
   @property()
   environment: CaskEnvironment = CaskEnvironment.sandbox;
@@ -130,10 +129,14 @@ export class CaskTopupButtonElement extends LitElement {
     return html`<button
       part="button"
       ?disabled=${this.loading || this.error || this.disabled}
-      class="${clsx('cask-topup-button', {
-        'cask-topup-button--loading': this.loading,
-        'cask-topup-button--disabled': this.loading || this.disabled,
-      },this.size)}"
+      class="${clsx(
+        'cask-topup-button',
+        {
+          'cask-topup-button--loading': this.loading,
+          'cask-topup-button--disabled': this.loading || this.disabled,
+        },
+        this.size
+      )}"
       type="button"
       onClick="(function(el){
           el.setAttribute('loading', true);
@@ -142,6 +145,7 @@ export class CaskTopupButtonElement extends LitElement {
             evt = evt || window.event;
             if (evt.keyCode == 27) {
               caskTopupDialog.open = false;
+              ${this.onClose ? 'window.' + this.onClose + '();' : ''}
             }
           };
 
@@ -151,14 +155,14 @@ export class CaskTopupButtonElement extends LitElement {
 
           caskTopupDialog.addEventListener('click', () => {
             caskTopupDialog.open = false;
-            ${this.onClose ? this.onClose + '();' : ''}
+            ${this.onClose ? 'window.' + this.onClose + '();' : ''}
           });
           caskTopupDialog.addEventListener('close', () => {
             caskTopupDialog.open = false;
-            ${this.onClose ? this.onClose + '();' : ''}
+            ${this.onClose ? 'window.' + this.onClose + '();' : ''}
           });
           caskTopupDialog.addEventListener('successTopup', (event) => {
-            ${this.onSuccess ? this.onSuccess + '(event.detail.txHash);' : ''}
+            ${this.onSuccess ? 'window.' + this.onSuccess + '(event.detail.txHash);' : ''}
             ${this.redirect && this.redirect.indexOf('http') === 0
         ? "window.location='" + this.redirect + "?txHash=' + event.detail.txHash"
         : ''};
