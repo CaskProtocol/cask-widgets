@@ -26,9 +26,16 @@ export enum IframeEvents {
 
 export enum CaskEnvironment {
   development = 'development',
-  integration = 'integration',
-  sandbox = 'sandbox',
+  internal = 'internal',
+  testnet = 'testnet',
   production = 'production',
+}
+
+export enum CaskAppUrl {
+  development = '//localhost:3000',
+  internal = '//app.internal.cask.fi',
+  testnet = '//app.testnet.cask.fi',
+  production = '//app.cask.fi',
 }
 
 export interface CheckoutAction<P = unknown> {

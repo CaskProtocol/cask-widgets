@@ -2,15 +2,8 @@ import {css, html, LitElement} from 'lit';
 import clsx from 'clsx';
 import {customElement, property, query} from 'lit/decorators.js';
 
-import {TopupAction, CaskEnvironment, IframeEvents, CASK_settings, WidgetTheme} from './constants';
+import {TopupAction, CaskEnvironment, CaskAppUrl, IframeEvents, CASK_settings, WidgetTheme} from './constants';
 import {appendStyle} from './utils';
-
-const environmentUrls = {
-  development: '//localhost:3000/#/topup/',
-  integration: '//app.beta.cask.fi/#/topup/',
-  sandbox: '//app.sandbox.cask.fi/#/topup/',
-  production: '//app.cask.fi/#/topup/',
-};
 
 @customElement('cask-topup')
 export class CaskTopupElement extends LitElement {
@@ -28,7 +21,7 @@ export class CaskTopupElement extends LitElement {
   `;
 
   @property()
-  environment: CaskEnvironment = CaskEnvironment.sandbox;
+  environment: CaskEnvironment = CaskEnvironment.testnet;
 
   @property()
   theme: WidgetTheme;
@@ -76,7 +69,7 @@ export class CaskTopupElement extends LitElement {
   iframe!: HTMLIFrameElement;
 
   render() {
-    const source = environmentUrls[this.environment];
+    const source = CaskAppUrl[this.environment] + '/#/topup/';
     return html`<iframe
       class="${clsx({'dark-theme': this.theme === WidgetTheme.Dark})}"
       id="cask-topup-iframe"

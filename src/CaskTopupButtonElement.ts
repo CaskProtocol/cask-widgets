@@ -72,7 +72,7 @@ export class CaskTopupButtonElement extends LitElement {
   label: string = 'Topup your Cask Balance';
 
   @property()
-  environment: CaskEnvironment = CaskEnvironment.sandbox;
+  environment: CaskEnvironment = CaskEnvironment.testnet;
 
   @property({type: String})
   size: ButtonSize = ButtonSize.Regular;

@@ -25,7 +25,7 @@ export class CaskCheckoutDialogElement extends LitElement {
     }
   `;
   @property()
-  environment: CaskEnvironment = CaskEnvironment.sandbox;
+  environment: CaskEnvironment = CaskEnvironment.testnet;
 
   @property()
   provider: string;

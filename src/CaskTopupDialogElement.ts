@@ -25,7 +25,7 @@ export class CaskTopupDialogElement extends LitElement {
     }
   `;
   @property()
-  environment: CaskEnvironment = CaskEnvironment.sandbox;
+  environment: CaskEnvironment = CaskEnvironment.testnet;
 
   @property({type: Boolean})
   open: boolean;
@@ -43,10 +43,7 @@ export class CaskTopupDialogElement extends LitElement {
   }
 
   renderWidget() {
-    return html`<cask-topup
-      environment="${this.environment}"
-      theme="${this.theme}"
-    ></cask-topup>`;
+    return html`<cask-topup environment="${this.environment}" theme="${this.theme}"></cask-topup>`;
   }
 
   render() {

@@ -81,7 +81,7 @@ export class CaskCheckoutButtonElement extends LitElement {
   ref: string;
 
   @property()
-  environment: CaskEnvironment = CaskEnvironment.sandbox;
+  environment: CaskEnvironment = CaskEnvironment.testnet;
 
   @property({type: String})
   size: ButtonSize = ButtonSize.Regular;

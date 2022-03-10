@@ -2,15 +2,16 @@ import {css, html, LitElement} from 'lit';
 import clsx from 'clsx';
 import {customElement, property, query} from 'lit/decorators.js';
 
-import {CheckoutAction, CaskEnvironment, IframeEvents, WidgetFlow, CASK_settings, WidgetTheme} from './constants';
+import {
+  CheckoutAction,
+  CaskEnvironment,
+  CaskAppUrl,
+  IframeEvents,
+  WidgetFlow,
+  CASK_settings,
+  WidgetTheme,
+} from './constants';
 import {appendStyle} from './utils';
-
-const environmentUrls = {
-  development: '//localhost:3000/#/subscribe/',
-  integration: '//app.beta.cask.fi/#/subscribe/',
-  sandbox: '//app.sandbox.cask.fi/#/subscribe/',
-  production: '//app.cask.fi/#/subscribe/',
-};
 
 @customElement('cask-checkout')
 export class CaskCheckoutElement extends LitElement {
@@ -28,7 +29,7 @@ export class CaskCheckoutElement extends LitElement {
   `;
 
   @property()
-  environment: CaskEnvironment = CaskEnvironment.sandbox;
+  environment: CaskEnvironment = CaskEnvironment.testnet;
 
   @property()
   provider: string;
@@ -90,7 +91,7 @@ export class CaskCheckoutElement extends LitElement {
   iframe!: HTMLIFrameElement;
 
   render() {
-    const source = environmentUrls[this.environment] + this.provider + '/' + this.plan;
+    const source = CaskAppUrl[this.environment] + '/#/subscribe/' + this.provider + '/' + this.plan;
     return html`<iframe
       class="${clsx({'dark-theme': this.theme === WidgetTheme.Dark})}"
       id="cask-checkout-iframe"
