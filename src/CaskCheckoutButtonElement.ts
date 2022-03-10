@@ -169,10 +169,6 @@ export class CaskCheckoutButtonElement extends LitElement {
           caskCheckoutDialog.environment='${this.environment}';
           document.body.appendChild(caskCheckoutDialog);
 
-          caskCheckoutDialog.addEventListener('click', () => {
-            caskCheckoutDialog.open = false;
-            ${this.onClose ? 'window.' + this.onClose + '();' : ''}
-          });
           caskCheckoutDialog.addEventListener('close', () => {
             caskCheckoutDialog.open = false;
             ${this.onClose ? 'window.' + this.onClose + '();' : ''}
