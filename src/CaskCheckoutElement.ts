@@ -17,8 +17,8 @@ import {appendStyle} from './utils';
 export class CaskCheckoutElement extends LitElement {
   static styles = css`
     iframe {
-      width: 450px;
-      height: 700px;
+      width: 374px;
+      height: 521px;
       border: 1px solid gray;
       border-radius: 15px;
     }
