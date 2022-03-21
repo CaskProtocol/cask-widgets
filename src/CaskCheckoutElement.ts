@@ -91,7 +91,7 @@ export class CaskCheckoutElement extends LitElement {
   iframe!: HTMLIFrameElement;
 
   render() {
-    const source = CaskAppUrl[this.environment] + '/#/subscribe/' + this.provider + '/' + this.plan;
+    const source = CaskAppUrl[this.environment] + '/#/subscribe/' + this.provider + '/' + this.plan + '?ref=' + this.ref;
     return html`<iframe
       class="${clsx({'dark-theme': this.theme === WidgetTheme.Dark})}"
       id="cask-checkout-iframe"
