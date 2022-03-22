@@ -20,6 +20,21 @@ export class CaskCheckoutDialogElement extends LitElement {
       justify-content: center;
       padding-top: 25px;
     }
+    .modal-close-button {
+      height: 30px;
+      width: 30px;
+      border: none;
+      left: 390px;
+      position: relative;
+      top: -15px;
+      border-radius: 100px;
+      background-color: #99a5b1;
+      color: white;
+      font-weight: 1000;
+      font-size: 18px;
+      padding: 2px;
+      cursor: pointer;
+    }
     .modal--closed {
       display: none;
     }
@@ -55,14 +70,15 @@ export class CaskCheckoutDialogElement extends LitElement {
   }
 
   renderWidget() {
-    return html`<cask-checkout
-      mode="${this.mode}"
-      provider="${this.provider}"
-      plan="${this.plan}"
-      ref="${this.ref}"
-      environment="${this.environment}"
-      theme="${this.theme}"
-    ></cask-checkout>`;
+    return html`<button class="modal-close-button" onClick="this.parentNode.parentNode.host.open = false">X</button>
+      <cask-checkout
+        mode="${this.mode}"
+        provider="${this.provider}"
+        plan="${this.plan}"
+        ref="${this.ref}"
+        environment="${this.environment}"
+        theme="${this.theme}"
+      ></cask-checkout>`;
   }
 
   render() {

@@ -31,12 +31,12 @@ export enum CaskEnvironment {
   production = 'production',
 }
 
-export enum CaskAppUrl {
-  development = '//localhost:3000',
-  internal = '//app.internal.cask.fi',
-  testnet = '//app.testnet.cask.fi',
-  production = '//app.cask.fi',
-}
+export const CaskAppUrl = {
+  development: '//localhost:3000',
+  internal: '//app.internal.cask.fi',
+  testnet: '//app.testnet.cask.fi',
+  production: '//app.cask.fi',
+};
 
 export interface CheckoutAction<P = unknown> {
   type: IframeEvents;
