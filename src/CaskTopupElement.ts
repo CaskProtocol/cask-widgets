@@ -9,8 +9,8 @@ import {appendStyle} from './utils';
 export class CaskTopupElement extends LitElement {
   static styles = css`
     iframe {
-      width: 374px;
-      height: 521px;
+      width: 480px;
+      height: 610px;
       border: 1px solid gray;
       border-radius: 15px;
     }
