@@ -33,7 +33,7 @@ Create a `<cask-checkout-button/>` element with required attributes mentioned be
   class="cask-checkout-button"
   provider="0x...."
   plan="123456"
-  environment="sandbox"
+  environment="testnet"
   onClose="close"
   onSuccess="success"
   label="Checkout with Crypto"
@@ -42,19 +42,19 @@ Create a `<cask-checkout-button/>` element with required attributes mentioned be
 
 ### Attributes:
 
-| name        | Required |                                                                                Description |
-|-------------|:--------:|-------------------------------------------------------------------------------------------:|
-| class       |          |                                                                        CSS classes to add. |
-| environment |          |     Environment. Possible values: `integration` or `production`. Defaults to `production`. |
-| provider    |    ✔     |                                                              Your provider wallet address. |
-| plan        |    ✔     |                                                                         Your Cask plan id. |
-| label       |          |                                                              Message to put on the button. |
-| ref         |          |                         Include a custom value associated with the Cask subscription data. |
-| size        |          |         Button size. Possible values:`regular`, `large` or `small`. Defaults to `regular`. |
-| theme       |          |                      Widget theme. Possible values: `dark` or `light`. Defaults to `dark`. |
-| redirect    |          | Redirect to URL upon successful subscribe. Does not call `onSuccess` handler, if supplied. |
-| onClose     |          |                                                                Callback for `close` event. |
-| onSuccess   |          |                                                  Callback for `successSubscription` event. |
+| name        | Required |                                                                                  Description |
+|-------------|:--------:|---------------------------------------------------------------------------------------------:|
+| class       |          |                                                                          CSS classes to add. |
+| environment |          |           Environment. Possible values: `testnet` or `production`. Defaults to `production`. |
+| provider    |    ✔     |                                                                Your provider wallet address. |
+| plan        |    ✔     |                                                                           Your Cask plan id. |
+| label       |          |                                                                Message to put on the button. |
+| ref         |          |                           Include a custom value associated with the Cask subscription data. |
+| size        |          |           Button size. Possible values:`regular`, `large` or `small`. Defaults to `regular`. |
+| theme       |          |                        Widget theme. Possible values: `dark` or `light`. Defaults to `dark`. |
+| redirect    |          |   Redirect to URL upon successful subscribe. Does not call `onSuccess` handler, if supplied. |
+| onClose     |          |                                                                  Callback for `close` event. |
+| onSuccess   |          |                                                    Callback for `successSubscription` event. |
 
 ### Events:
 
