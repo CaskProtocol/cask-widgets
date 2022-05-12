@@ -24,7 +24,7 @@ export class CaskCheckoutDialogElement extends LitElement {
       height: 30px;
       width: 30px;
       border: none;
-      left: 465px;
+      left: 494px;
       position: relative;
       top: -15px;
       border-radius: 100px;

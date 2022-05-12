@@ -17,8 +17,8 @@ import {appendStyle} from './utils';
 export class CaskCheckoutElement extends LitElement {
   static styles = css`
     iframe {
-      width: 450px;
-      height: 700px;
+      width: 480px;
+      height: 610px;
       border: 1px solid gray;
       border-radius: 15px;
     }
@@ -91,7 +91,7 @@ export class CaskCheckoutElement extends LitElement {
   iframe!: HTMLIFrameElement;
 
   render() {
-    const source = CaskAppUrl[this.environment] + '/#/subscribe/' + this.provider + '/' + this.plan;
+    const source = CaskAppUrl[this.environment] + '/#/subscribe/' + this.provider + '/' + this.plan + '?ref=' + this.ref;
     return html`<iframe
       class="${clsx({'dark-theme': this.theme === WidgetTheme.Dark})}"
       id="cask-checkout-iframe"
