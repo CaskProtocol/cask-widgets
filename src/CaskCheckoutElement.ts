@@ -5,6 +5,7 @@ import {customElement, property, query} from 'lit/decorators.js';
 import {
   CheckoutAction,
   CaskEnvironment,
+  CaskDefaultChain,
   CaskAppUrl,
   IframeEvents,
   WidgetFlow,
@@ -30,6 +31,9 @@ export class CaskCheckoutElement extends LitElement {
 
   @property()
   environment: CaskEnvironment = CaskEnvironment.testnet;
+
+  @property()
+  chains: string = '';
 
   @property()
   provider: string;
@@ -91,7 +95,16 @@ export class CaskCheckoutElement extends LitElement {
   iframe!: HTMLIFrameElement;
 
   render() {
-    const source = CaskAppUrl[this.environment] + '/#/subscribe/' + this.provider + '/' + this.plan + '?ref=' + this.ref;
+    let source =
+      CaskAppUrl[this.environment] +
+      '/#/subscribe/' +
+      this.provider +
+      '/' +
+      this.plan +
+      '/' +
+      (this.chains || CaskDefaultChain[this.environment]) +
+      '?ref=' +
+      this.ref;
     return html`<iframe
       class="${clsx({'dark-theme': this.theme === WidgetTheme.Dark})}"
       id="cask-checkout-iframe"

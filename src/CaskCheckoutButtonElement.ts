@@ -72,6 +72,9 @@ export class CaskCheckoutButtonElement extends LitElement {
   label: string = 'Checkout with Crypto';
 
   @property({type: String})
+  chains: string = '';
+
+  @property({type: String})
   provider: string;
 
   @property({type: String})
@@ -163,6 +166,7 @@ export class CaskCheckoutButtonElement extends LitElement {
           };
 
           var caskCheckoutDialog = document.createElement('cask-checkout-dialog');
+          caskCheckoutDialog.chains='${this.chains}';
           caskCheckoutDialog.provider='${this.provider}';
           caskCheckoutDialog.plan='${this.plan}';
           caskCheckoutDialog.ref='${this.ref}';
