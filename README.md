@@ -31,6 +31,7 @@ Create a `<cask-checkout-button/>` element with required attributes mentioned be
 ```html
 <cask-checkout-button
   class="cask-checkout-button"
+  chains="polygon,avalanche"
   provider="0x...."
   plan="123456"
   environment="sandbox"
@@ -42,19 +43,20 @@ Create a `<cask-checkout-button/>` element with required attributes mentioned be
 
 ### Attributes:
 
-| name        | Required |                                                                                Description |
-|-------------|:--------:|-------------------------------------------------------------------------------------------:|
-| class       |          |                                                                        CSS classes to add. |
-| environment |          |     Environment. Possible values: `integration` or `production`. Defaults to `production`. |
-| provider    |    ✔     |                                                              Your provider wallet address. |
-| plan        |    ✔     |                                                                         Your Cask plan id. |
-| label       |          |                                                              Message to put on the button. |
-| ref         |          |                         Include a custom value associated with the Cask subscription data. |
-| size        |          |         Button size. Possible values:`regular`, `large` or `small`. Defaults to `regular`. |
-| theme       |          |                      Widget theme. Possible values: `dark` or `light`. Defaults to `dark`. |
-| redirect    |          | Redirect to URL upon successful subscribe. Does not call `onSuccess` handler, if supplied. |
-| onClose     |          |                                                                Callback for `close` event. |
-| onSuccess   |          |                                                  Callback for `successSubscription` event. |
+| name        | Required |                                                                                                Description |
+| ----------- | :------: | ---------------------------------------------------------------------------------------------------------: |
+| class       |          |                                                                                        CSS classes to add. |
+| environment |          |                         Environment. Possible values: `testnet` or `production`. Defaults to `production`. |
+| chains      |          | Comma separated list of chains supported. Defaults to `polygon` on `production` and `mumbai` on `testnet`. |
+| provider    |    ✔     |                                                                              Your provider wallet address. |
+| plan        |    ✔     |                                                                                         Your Cask plan id. |
+| label       |          |                                                                              Message to put on the button. |
+| ref         |          |                                         Include a custom value associated with the Cask subscription data. |
+| size        |          |                         Button size. Possible values:`regular`, `large` or `small`. Defaults to `regular`. |
+| theme       |          |                                      Widget theme. Possible values: `dark` or `light`. Defaults to `dark`. |
+| redirect    |          |                 Redirect to URL upon successful subscribe. Does not call `onSuccess` handler, if supplied. |
+| onClose     |          |                                                                                Callback for `close` event. |
+| onSuccess   |          |                                                                  Callback for `successSubscription` event. |
 
 ### Events:
 
@@ -62,7 +64,6 @@ Create a `<cask-checkout-button/>` element with required attributes mentioned be
 | ------------------- | ---------------------------------: |
 | close               |          Fires after widget closes |
 | successSubscription | Fires when user subscribes to plan |
-
 
 ### Styling:
 
@@ -76,10 +77,7 @@ Create a `<cask-checkout-button/>` element with required attributes mentioned be
     width: 100%; /* Those styles apply to button in shadow root */
   }
 </style>
-<cask-checkout-button
-  class="cask-checkout-button"
-  label="Pay with Crypto"
-/>
+<cask-checkout-button class="cask-checkout-button" label="Pay with Crypto" />
 ```
 
 See more about `::part()` on https://developer.mozilla.org/en-US/docs/Web/CSS/::part

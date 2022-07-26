@@ -43,6 +43,9 @@ export class CaskCheckoutDialogElement extends LitElement {
   environment: CaskEnvironment = CaskEnvironment.testnet;
 
   @property()
+  chains: string = '';
+
+  @property()
   provider: string;
 
   @property()
@@ -73,6 +76,7 @@ export class CaskCheckoutDialogElement extends LitElement {
     return html`<button class="modal-close-button" onClick="this.parentNode.parentNode.host.open = false">X</button>
       <cask-checkout
         mode="${this.mode}"
+        chains="${this.chains}"
         provider="${this.provider}"
         plan="${this.plan}"
         ref="${this.ref}"
