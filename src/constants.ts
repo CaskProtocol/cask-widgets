@@ -31,6 +31,13 @@ export enum CaskEnvironment {
   production = 'production',
 }
 
+export enum CaskDefaultChain {
+  development = 'mumbai',
+  internal = 'mumbai',
+  testnet = 'mumbai',
+  production = 'polygon',
+}
+
 export const CaskAppUrl = {
   development: '//localhost:3000',
   internal: '//app.internal.cask.fi',
