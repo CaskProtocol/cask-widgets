@@ -34,7 +34,7 @@ Create a `<cask-checkout-button/>` element with required attributes mentioned be
   chains="polygon,avalanche"
   provider="0x...."
   plan="123456"
-  environment="sandbox"
+  environment="testnet"
   onClose="close"
   onSuccess="success"
   label="Checkout with Crypto"
@@ -57,6 +57,7 @@ Create a `<cask-checkout-button/>` element with required attributes mentioned be
 | redirect    |          |                 Redirect to URL upon successful subscribe. Does not call `onSuccess` handler, if supplied. |
 | onClose     |          |                                                                                Callback for `close` event. |
 | onSuccess   |          |                                                                  Callback for `successSubscription` event. |
+
 
 ### Events:
 
