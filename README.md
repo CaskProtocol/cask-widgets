@@ -31,7 +31,7 @@ Create a `<cask-checkout-button/>` element with required attributes mentioned be
 ```html
 <cask-checkout-button
   class="cask-checkout-button"
-  environment="testnet"
+  environment="production"
   chains="polygon,avalanche"
   provider="0x...."
   plan="123456"
